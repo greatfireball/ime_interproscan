@@ -26,7 +26,7 @@ RUN     chmod +x /tmp/check_md5sum_in_pipe.pl
 WORKDIR /opt
 ENV     INTERPROSCAN_VERSION=5.32-71.0
 RUN	wget -q --show-progress ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/${INTERPROSCAN_VERSION}/interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz.md5 && \
-	wget -q --show-progress ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/${INTERPROSCAN_VERSION}/interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz | \
+	wget -q --show-progress -O - ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/${INTERPROSCAN_VERSION}/interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz | \
 	/tmp/check_md5sum_in_pipe.pl interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz.md5 | \
         tar xzf - && \
         rm interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz.md5 && \
