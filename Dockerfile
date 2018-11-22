@@ -20,12 +20,13 @@ RUN apt update && apt install --yes \
         openjdk-8-jre-headless
 
 WORKDIR /opt
-RUN     wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/5.27-66.0/interproscan-5.27-66.0-64-bit.tar.gz && \
-        wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/5.27-66.0/interproscan-5.27-66.0-64-bit.tar.gz.md5 && \
-        md5sum -c interproscan-5.27-66.0-64-bit.tar.gz.md5 && \
-        tar xzf interproscan-5.27-66.0-64-bit.tar.gz && \
-        rm interproscan-5.27-66.0-64-bit.tar.gz.md5 interproscan-5.27-66.0-64-bit.tar.gz && \
-        ln -s interproscan-5.27-66.0 interproscan
+ENV     INTERPROSCAN_VERSION=5.27-66.0
+RUN     wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/${INTERPROSCAN_VERSION}/interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz && \
+        wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/${INTERPROSCAN_VERSION}/interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz.md5 && \
+        md5sum -c interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz.md5 && \
+        tar xzf interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz && \
+        rm interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz.md5 interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz && \
+        ln -s interproscan-${INTERPROSCAN_VERSION} interproscan
 
 WORKDIR /opt/interproscan/data
 RUN     wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-12.0.tar.gz && \
