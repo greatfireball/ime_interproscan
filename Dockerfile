@@ -21,16 +21,16 @@ RUN apt update && apt install --yes \
 
 WORKDIR /opt
 ENV     INTERPROSCAN_VERSION=5.32-71.0
-RUN     wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/${INTERPROSCAN_VERSION}/interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz && \
-        wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/${INTERPROSCAN_VERSION}/interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz.md5 && \
+RUN     wget -q --show-progress ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/${INTERPROSCAN_VERSION}/interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz && \
+        wget -q --show-progress ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/${INTERPROSCAN_VERSION}/interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz.md5 && \
         md5sum -c interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz.md5 && \
         tar xzf interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz && \
         rm interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz.md5 interproscan-${INTERPROSCAN_VERSION}-64-bit.tar.gz && \
         ln -s interproscan-${INTERPROSCAN_VERSION} interproscan
 
 WORKDIR /opt/interproscan/data
-RUN     wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-12.0.tar.gz.md5 && \
-	wget -O - ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-12.0.tar.gz | tar xzf -
+RUN     wget -q --show-progress ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-12.0.tar.gz.md5 && \
+	wget -q --show-progress -O - ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-12.0.tar.gz | tar xzf -
 
 VOLUME  /data
 WORKDIR /data
