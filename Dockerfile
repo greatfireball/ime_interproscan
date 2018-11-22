@@ -29,11 +29,8 @@ RUN     wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/${INTERPROSCAN_VERS
         ln -s interproscan-${INTERPROSCAN_VERSION} interproscan
 
 WORKDIR /opt/interproscan/data
-RUN     wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-12.0.tar.gz && \
-        wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-12.0.tar.gz.md5 && \
-        md5sum -c panther-data-12.0.tar.gz.md5 && \
-        tar xzf panther-data-12.0.tar.gz && \
-        rm panther-data-12.0.tar.gz.md5 panther-data-12.0.tar.gz
+RUN     wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-12.0.tar.gz.md5 && \
+	wget -O - ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-12.0.tar.gz | tar xzf -
 
 VOLUME  /data
 WORKDIR /data
