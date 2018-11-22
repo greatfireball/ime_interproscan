@@ -17,9 +17,11 @@ LABEL maintainer="frank.foerster@ime.fraunhofer.de" \
 RUN apt update && apt install --yes \
         wget \
         python \
+	perl \
         openjdk-8-jre-headless
 
 ADD 	check_md5sum_in_pipe.pl /tmp/check_md5sum_in_pipe.pl
+RUN     chmod +x /tmp/check_md5sum_in_pipe.pl
 
 WORKDIR /opt
 ENV     INTERPROSCAN_VERSION=5.32-71.0
