@@ -16,7 +16,7 @@ LABEL maintainer="frank.foerster@ime.fraunhofer.de" \
 
 RUN apt update && apt install --yes \
         wget \
-        python \
+        python3 \
 	perl \
         openjdk-8-jre-headless
 
