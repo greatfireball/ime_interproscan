@@ -33,11 +33,12 @@ RUN	wget -q --show-progress ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/${IN
         ln -s interproscan-${INTERPROSCAN_VERSION} interproscan
 
 WORKDIR /opt/interproscan/data
-RUN     wget -q --show-progress ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-12.0.tar.gz.md5 && \
-	wget -q --show-progress -O - ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-12.0.tar.gz | \
-	/tmp/check_md5sum_in_pipe.pl panther-data-12.0.tar.gz.md5 | \
+ENV     PANTHER_VERSION=14.1
+RUN     wget -q --show-progress ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-${PANTHER_VERSION}.tar.gz.md5 && \
+	wget -q --show-progress -O - ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-${PANTHER_VERSION}.tar.gz | \
+	/tmp/check_md5sum_in_pipe.pl panther-data-${PANTHER_VERSION}.tar.gz.md5 | \
 	tar xzf - && \
-	rm panther-data-12.0.tar.gz.md5
+	rm panther-data-${PANTHER_VERSION}.tar.gz.md5
 
 VOLUME  /data
 WORKDIR /data
