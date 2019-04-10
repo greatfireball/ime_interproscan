@@ -19,6 +19,7 @@ RUN apt update && apt install --yes \
         python3 \
 	perl \
 	gcc \
+	libidn11 \
         openjdk-8-jre-headless
 
 ADD	check_md5sum_in_pipe.pl /tmp/check_md5sum_in_pipe.pl
