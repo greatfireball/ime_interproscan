@@ -37,6 +37,26 @@ docker run --rm -it -v $PWD:/data greatfireball/ime_interproscan.sh \
   --seqtype p \
   --appl CDD,Coils,PANTHER,Pfam,Phobius,PIRSF,PRINTS,ProDom,ProSitePatterns,ProSiteProfiles,SFLD,SMART,SUPERFAMILY,TIGRFAM
 ```
+## Activating Licensed Analyses
+Three analysis require their own license agreements: Phobius/SignalP/TMHMM. Therefore, those three programs are not included into the interproscan archive. Further information about the download of those programs can be found at the [interproscan wiki](https://github.com/ebi-pf-team/interproscan/wiki/ActivatingLicensedAnalyses). All analysis can be activated by mounting the required software into the docker images as volumes. For example, the same interpro run as above, but with activated licensed Analyses can be run as follows:
+
+```
+INTERPRO=LOCATION_WHERE_LICENSED_SOFTWARE_WAS_EXTRACTED
+docker run --rm -it -v $PWD:/data greatfireball/ime_interproscan.sh \
+  -v "${INTERPRO}"/signalp-4.1:/opt/interproscan/bin/signalp/4.1 \
+  -v "${INTERPRO}"/tmhmm-2.0c/bin/decodeanhmm.Linux_x86_64:/opt/interproscan/bin/tmhmm/2.0c/decodeanhmm \
+  -v "${INTERPRO}"/tmhmm-2.0c/lib/TMHMM2.0.model:/opt/interproscan/data/tmhmm/2.0c/TMHMM2.0c.model \
+  -v "${INTERPRO}"/phobius101:/opt/interproscan/bin/phobius/1.01/ \
+  -f TSV,XML,JSON,GFF3,HTML,SVG \
+  --cpu 4 \
+  --output-dir /data/output \
+  --goterms \
+  --iprlookup \
+  --input infile.fasta \
+  --pathways \
+  --seqtype p \
+  --appl CDD,Coils,TMHMM,Gene3D,Hamap,MobiDBLite,PANTHER,Pfam,Phobius,PIRSF,PRINTS,ProDom,ProSitePatterns,ProSiteProfiles,SFLD,SignalP_EUK,SignalP_GRAM_NEGATIVE,SignalP_GRAM_POSITIVE,SMART,SUPERFAMILY,TIGRFAM
+```
 
 ## Releases
 
